@@ -9,11 +9,11 @@ deverá imprimir na saída padrão a soma desses dois números
 
 ## Exemplos
 
-* Entrada: `1 2`
-* Saida: `3`
+Entrada | Saida
+------- | -----
+`1 2` | `3`
+`100 1` | `101`
 
-* Entrada: `100 1`
-* Saida: `101`
 
 ## Instruções adicionais
 
