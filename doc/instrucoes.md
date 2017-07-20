@@ -101,8 +101,8 @@ Este projeto está organizado em diretórios da seguinte forma:
 
 * Raiz `./`: Makefile e scripts de administração. Não deveria ser
   modificado.
-* `./src`: Todos os arquivos-fonte (.c) e header files (.h) ficam aqui. O
-  arquivo main.c é o que contém o programa principal.
+* `./src`: Todos os arquivos-fonte (.c, .l) e header files (.h) ficam aqui. O
+  arquivo main.l é o que contém o programa principal.
 * `./tests`: Contém entradas e saídas para testes. Pode ser usado como suporte
   para depuração do projeto.
 * `./doc`: Arquivos de documentação (como este texto).
@@ -111,6 +111,7 @@ Essa organização não deve ser modificada. Usando essa estrutura, é possível
 executar os seguintes comandos:
 
 * `make`: compila o programa principal.
+* `make lex`: somente executa o Lex, gerando o arquivo-fonte `main.c`.
 * `make test`: compila o programa principal e executa os testes de unidade.
   As mensagens na tela permitem saber em quais testes o programa falhou.
 * `make clean`: remove todos os arquivos criados por processos de compilação
