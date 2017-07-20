@@ -1,12 +1,13 @@
 # Macros para compilacao
 CC = gcc
-CFLAGS = -Wextra
+CFLAGS = -Wextra -ll
 DIR = src
 FILENAME = $(DIR)/main.c
 TARGET = ./main
 SRCS := $(shell find $(DIR) -name '*.c')
 OBJS = $(SRCS:.c=.o)
-
+LEX = lex
+LEXSRCS := $(shell find $(DIR) -name '*.l')
 
 # Macros para teste
 BASH = sh
@@ -17,18 +18,20 @@ VERBOSE ?= 1
 ZIP = zip
 USERNAME ?= $(USER)
 ZIPFILE = $(USERNAME).zip
-EXTENSIONS = *.c *.h *.in *.out *.sh
+EXTENSIONS = *.l *.c *.h *.in *.out *.sh
 
 .PHONY: depend clean
 
-all:$(TARGET)
+all:lex $(TARGET)
+
+lex:$(LEXSRCS)
+	$(LEX) -o$(FILENAME) $(LEXSRCS)
 
 $(TARGET):$(OBJS)
 	$(CC) -o$(TARGET) $(OBJS) $(CFLAGS)
 
 $(OBJS):$(SRCS)
 	$(CC) $(CFLAGS) -c $< -o $@
-
 
 test:all
 	$(BASH) $(TEST_SCRIPT) $(TARGET) $(VERBOSE)
@@ -37,6 +40,7 @@ zip:clean
 	$(ZIP) -R $(ZIPFILE)  Makefile $(EXTENSIONS)
 
 clean:
+	$(RM) $(FILENAME)
 	$(RM) ./$(TARGET)
 	$(RM) $(DIR)/*.o
 	$(RM) ./$(ZIPFILE)
