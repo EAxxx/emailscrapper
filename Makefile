@@ -1,13 +1,15 @@
 # Macros para compilacao
 CC = gcc
-CFLAGS = -Wextra -ll
+CFLAGS = -Wextra
 DIR = src
 FILENAME = $(DIR)/main.c
+OBJNAME = $(DIR)/main.o
 TARGET = ./main
 SRCS := $(shell find $(DIR) -name '*.c')
 OBJS = $(SRCS:.c=.o)
 LEX = lex
 LEXSRCS := $(shell find $(DIR) -name '*.l')
+LEXFLAGS = -ll
 
 # Macros para teste
 BASH = sh
@@ -24,14 +26,14 @@ EXTENSIONS = *.l *.c *.h *.in *.out *.sh
 
 all:lex $(TARGET)
 
+$(TARGET):$(OBJNAME)
+	$(CC) -o$(TARGET) $(OBJNAME) $(CFLAGS) $(LEXFLAGS)
+
+$(OBJNAME):$(FILENAME)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 lex:$(LEXSRCS)
 	$(LEX) -o$(FILENAME) $(LEXSRCS)
-
-$(TARGET):$(OBJS)
-	$(CC) -o$(TARGET) $(OBJS) $(CFLAGS)
-
-$(OBJS):$(SRCS)
-	$(CC) $(CFLAGS) -c $< -o $@
 
 test:all
 	$(BASH) $(TEST_SCRIPT) $(TARGET) $(VERBOSE)
