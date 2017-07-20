@@ -1,46 +1,40 @@
-# Um pequeno somador
+# Email Scrapper
 
-Esta é uma tarefa-template, que deve ser modificada para ser convertida em
-outras atividades. Aqui, fica o enunciado da tarefa, ou seja, sua descrição, com
-instruções claras sobre o problema que deve ser resolvido. Esta tarefa consiste
-em fazer um somador. Ele deverá receber uma linha de texto contendo dois números
-inteiros. Essa linha se encerra com caractere fim de linha `\n`. O programa
-deverá imprimir na saída padrão a soma desses dois números
+Webscrapping é o ato de varrer um documento web em busca de informações. Você
+pode buscar por URLs válidas e usar essa informação para construir um
+webcrawler, ou pode buscar por todas as imagens em uma página, e assim por
+diante. Nesta tarefa, encontraremos e-mails válidos usando análise léxica.
 
-## Como fazer uma outra tarefa usando este template
-1. Crie um repositório vazio no Github (sem inicializar o readme nem a licença)
-   com o nome da sua tarefa usando a interface web. Vamos chamar esse
-   repositório com o nome fantasma de `foobar`.
+## Informações adicionais
+O programa deve ser escrito em Lex (o Makefile que acompanha esta tarefa já
+contempla a compilação em Lex ao usar `make` e `make test`). Veja que há um
+arquivo `src/main.l` que deverá ser modificado para propor a solução desta
+tarefa.
 
-1. Faça um clone deste repositório para um diretório com o nome de sua tarefa.
-   Se sua tarefa se chama foobar, então a linha de comando é:
-   `git clone https://github.com/Beethoven-ED/template_unit_test.git foobar`
+O programa receberá um pequeno texto (em formato ASCII padrão) e deverá imprimir
+na tela todos os e-mails válidos lidos, *um por linha* e *na ordem que forem
+lidos*. E-mails válidos devem obedecer às seguintes regras:
 
-1. Desvincule sua cópia local deste repositório:
-   `git remote remove origin`
+1. São compostos de um nome de usuário e um domínio, separados por um sinal de
+   arroba (`@`).
 
-1. Vincule sua cópia local ao seu repositório no github:
-   `git remote add origin https://github.com/seu_username/foobar.git`
+1. Tanto o nome de usuário quanto o domínio têm qualquer número não-nulo de
+   caracteres alfanuméricos.
 
-1. Faça as modificações necessárias no código. Use `git add` e `git commit`
-   sempre que necessário. Lembre-se de:
-   * Modificar o enunciado
-   * Adicionar testes de unidade
-   * Adicionar um programa-template, se achar necessário.
-   * Testar se `make` e `make test` estão funcionando adequadamente.
+1. Tanto o nome de usuário quanto o domínio podem incluir os caracteres traço
+   (`-`), underline (`_`) e ponto (`.`), mas não podem começar nem terminar com
+   esses caracteres.
 
-1. Quando terminar, envie suas modificações ao repositório: `git push
-   --set-upstream origin master` (a flag `--set-upstream origin master` só será
-   necessária da primeira vez que fizer o `push`).
-
-1. Verifique se as modificações estão todas no Github, no endereço correto.
+1. Outros caracteres são sempre inválidos (mesmo que alguns, como o `+`, sejam
+   possíveis, eles foram excluídos desta tarefa)
 
 ## Exemplos
 
 Entrada | Saida
 ------- | -----
-`1 2` | `3`
-`100 1` | `101`
+`meu@email.com eh um email valido e seu@email tambem` |
+`meu@email.com\nseu@email`
+`algunsemails-@.naosaovalidos entao o retorno eh nulo` | ``
 
 
 ## Instruções adicionais
