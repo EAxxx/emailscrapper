@@ -34,11 +34,12 @@ do
 
   # Executa o programa que foi compilado usando o arquivo de teste.in como
   # entrada
-  res=`$program < $t`
+  $program < $t > ./$$.out
 
   # Verifica se a diferenca entre a saida encontrada e a saida desejada
   # eh uma string de comprimento nao-zero
-  d=`echo $res | diff  $o -`
+  d=`echo ./$$.out | diff  $o -`
+  rm $$.out
   if [ -n "$d" ]; then
     if [ $verbose -eq 1 ]; then
       echo "Teste: $t - Falhou"
