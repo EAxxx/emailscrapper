@@ -38,7 +38,7 @@ do
 
   # Verifica se a diferenca entre a saida encontrada e a saida desejada
   # eh uma string de comprimento nao-zero
-  d=`echo ./$$.out | diff  $o -`
+  d=`cat ./$$.out | diff  $o -`
   rm $$.out
   if [ -n "$d" ]; then
     if [ $verbose -eq 1 ]; then
